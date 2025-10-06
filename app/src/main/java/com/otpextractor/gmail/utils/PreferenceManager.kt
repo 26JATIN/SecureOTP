@@ -24,6 +24,14 @@ class PreferenceManager(context: Context) {
         return prefs.getInt(KEY_OTP_COUNT, 0)
     }
 
+    fun setGmailWarningDismissed(dismissed: Boolean) {
+        prefs.edit().putBoolean(KEY_GMAIL_WARNING_DISMISSED, dismissed).apply()
+    }
+
+    fun isGmailWarningDismissed(): Boolean {
+        return prefs.getBoolean(KEY_GMAIL_WARNING_DISMISSED, false)
+    }
+
     fun clear() {
         prefs.edit().clear().apply()
     }
@@ -32,5 +40,6 @@ class PreferenceManager(context: Context) {
         private const val PREF_NAME = "otp_extractor_prefs"
         private const val KEY_SERVICE_ENABLED = "service_enabled"
         private const val KEY_OTP_COUNT = "otp_count"
+        private const val KEY_GMAIL_WARNING_DISMISSED = "gmail_warning_dismissed"
     }
 }

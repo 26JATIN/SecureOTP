@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateUI()
+        checkAndShowGmailWarning()
     }
 
     private fun setupUI() {
@@ -60,6 +61,58 @@ class MainActivity : AppCompatActivity() {
                 updateStatusText()
             }
         }
+
+        binding.btnOptimizeGmail.setOnClickListener {
+            openGmailOptimization()
+        }
+
+        setupWarningBanner()
+    }
+
+    private fun setupWarningBanner() {
+        binding.warningBanner.root.findViewById<android.widget.ImageButton>(R.id.btnCloseWarning).setOnClickListener {
+            hideWarningBanner()
+        }
+
+        binding.warningBanner.root.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnDontShowAgain).setOnClickListener {
+            prefManager.setGmailWarningDismissed(true)
+            hideWarningBanner()
+            Toast.makeText(this, "Gmail warning disabled", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.warningBanner.root.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnFixGmailWarning).setOnClickListener {
+            openGmailOptimization()
+        }
+    }
+
+    private fun checkAndShowGmailWarning() {
+        // Don't show if user dismissed it
+        if (prefManager.isGmailWarningDismissed()) {
+            hideWarningBanner()
+            return
+        }
+
+        // Check if Gmail has restrictions
+        val hasRestrictions = com.otpextractor.secureotp.utils.BackgroundRestrictionChecker.hasGmailRestrictions(this)
+        
+        if (hasRestrictions) {
+            showWarningBanner()
+        } else {
+            hideWarningBanner()
+        }
+    }
+
+    private fun showWarningBanner() {
+        binding.warningBanner.root.visibility = android.view.View.VISIBLE
+    }
+
+    private fun hideWarningBanner() {
+        binding.warningBanner.root.visibility = android.view.View.GONE
+    }
+
+    private fun openGmailOptimization() {
+        val intent = Intent(this, GmailOptimizationActivity::class.java)
+        startActivity(intent)
     }
 
     private fun checkPermissions() {

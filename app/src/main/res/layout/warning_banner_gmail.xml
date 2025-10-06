@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardGmailWarning"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:visibility="gone"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="#FFF3E0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_warning"
+                android:tint="#F57C00"
+                android:contentDescription="Warning icon" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:text="⚡ Gmail OTP Delays Detected"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#E65100" />
+
+            <ImageButton
+                android:id="@+id/btnCloseWarning"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Close"
+                android:tint="#757575" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvWarningMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Gmail has background restrictions that delay OTP notifications. Tap below to fix."
+            android:textSize="13sp"
+            android:textColor="#424242"
+            android:lineSpacingExtra="2dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDontShowAgain"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Don't Show Again"
+                android:textSize="12sp"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:textColor="#757575" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFixGmailWarning"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:text="Fix Now"
+                android:textSize="12sp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                app:icon="@drawable/ic_settings"
+                app:iconGravity="start" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

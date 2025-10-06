@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.Material3.Dark">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Gmail Optimization"
+            app:navigationIcon="@drawable/ic_arrow_back" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Status Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/statusContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/iconStatus"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="16dp"
+                        android:src="@drawable/ic_warning"
+                        android:contentDescription="Status icon" />
+
+                    <TextView
+                        android:id="@+id/tvStatusTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="Gmail Sync May Be Delayed" />
+
+                    <TextView
+                        android:id="@+id/tvStatusDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp"
+                        tools:text="Battery optimization is limiting Gmail's background sync" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Fix Buttons Container -->
+            <LinearLayout
+                android:id="@+id/fixButtonsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <!-- Recommendation Text -->
+                <TextView
+                    android:id="@+id/tvRecommendation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:padding="12dp"
+                    android:background="@drawable/bg_info_box"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"
+                    tools:text="To get faster Gmail OTPs:\n\n• Disable battery optimization for Gmail\n• Allow Gmail to run in background" />
+
+                <!-- Battery Optimization Fix -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardBattery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardElevation="2dp"
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tvBatteryHelp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:text="⚡ Battery Optimization\n\nAndroid is limiting Gmail's background activity to save battery. This delays OTP notifications.\n\nTap below to allow Gmail to run unrestricted."
+                            android:textSize="14sp"
+                            android:lineSpacingExtra="2dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnFixBattery"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Allow Gmail (Opens Permission Dialog)"
+                            app:icon="@drawable/ic_battery"
+                            app:iconGravity="start" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Background Restriction Fix -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardElevation="2dp"
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tvBackgroundHelp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:text="🚫 Background Activity Restricted\n\nGmail cannot sync in the background. This severely delays OTP delivery.\n\nTap below to open Gmail's app settings → Battery → Remove restrictions."
+                            android:textSize="14sp"
+                            android:lineSpacingExtra="2dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnFixBackground"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Open Gmail App Settings"
+                            app:icon="@drawable/ic_settings"
+                            app:iconGravity="start" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Data Saver Fix -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardDataSaver"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardElevation="2dp"
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tvDataSaverHelp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:text="📡 Data Saver Enabled\n\nData Saver blocks background data for Gmail. Your OTPs cannot arrive without internet access.\n\nTap below to add Gmail to unrestricted apps list."
+                            android:textSize="14sp"
+                            android:lineSpacingExtra="2dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnFixDataSaver"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Open Data Saver Settings"
+                            app:icon="@drawable/ic_data"
+                            app:iconGravity="start" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Standby Bucket Fix -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardStandby"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardElevation="2dp"
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tvStandbyHelp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:text="⏸️ App Standby Mode\n\nGmail is in a low-priority bucket. Open Gmail frequently to improve its priority."
+                            android:textSize="14sp"
+                            android:lineSpacingExtra="2dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnOpenGmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Open Gmail Now"
+                            app:icon="@drawable/ic_email"
+                            app:iconGravity="start" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!-- Issues Container -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/issuesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="8dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:text="Technical Details"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvDetailedInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="monospace"
+                        android:textSize="12sp"
+                        android:lineSpacingExtra="4dp"
+                        tools:text="Battery Optimization: ❌ Enabled\nBackground Activity: ✅ Allowed\nData Saver: ✅ Disabled\nStandby Bucket: Rare" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Refresh Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Refresh Status"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:icon="@drawable/ic_refresh"
+                app:iconGravity="start" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
