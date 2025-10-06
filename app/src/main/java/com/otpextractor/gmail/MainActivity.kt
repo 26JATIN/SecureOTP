@@ -1,4 +1,4 @@
-package com.otpextractor.gmail
+package com.otpextractor.secureotp
 
 import android.Manifest
 import android.content.ComponentName
@@ -12,9 +12,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.otpextractor.gmail.databinding.ActivityMainBinding
-import com.otpextractor.gmail.service.OtpListener
-import com.otpextractor.gmail.utils.PreferenceManager
+import com.otpextractor.secureotp.databinding.ActivityMainBinding
+import com.otpextractor.secureotp.service.OtpListener
+import com.otpextractor.secureotp.utils.PreferenceManager
 
 class MainActivity : AppCompatActivity() {
 

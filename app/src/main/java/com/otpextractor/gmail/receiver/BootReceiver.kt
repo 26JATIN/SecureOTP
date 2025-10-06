@@ -1,4 +1,4 @@
-package com.otpextractor.gmail.receiver
+package com.otpextractor.secureotp.receiver
 
 import android.content.BroadcastReceiver
 import android.content.ComponentName
@@ -8,8 +8,8 @@ import android.os.Build
 import android.provider.Settings
 import android.service.notification.NotificationListenerService
 import android.util.Log
-import com.otpextractor.gmail.service.OtpListener
-import com.otpextractor.gmail.utils.PreferenceManager
+import com.otpextractor.secureotp.service.OtpListener
+import com.otpextractor.secureotp.utils.PreferenceManager
 
 /**
  * BroadcastReceiver to handle device boot and restart OTP service

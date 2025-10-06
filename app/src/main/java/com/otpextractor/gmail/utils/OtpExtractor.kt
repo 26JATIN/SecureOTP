@@ -1,4 +1,4 @@
-package com.otpextractor.gmail.utils
+package com.otpextractor.secureotp.utils
 
 import android.util.Log
 import java.util.regex.Pattern

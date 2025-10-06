@@ -1,4 +1,4 @@
-package com.otpextractor.gmail.utils
+package com.otpextractor.secureotp.utils
 
 /**
  * Test cases for OTP Extractor

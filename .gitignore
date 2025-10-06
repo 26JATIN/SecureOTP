@@ -1,3 +1,14 @@
+# 🔒 SECURITY: Keystore files - NEVER COMMIT!
+*.jks
+*.keystore
+*.p12
+*.pem
+*.sh
+secureotp-release-key*
+gradle.properties
+*password*.txt
+*secret*.txt
+
 *.iml
 .gradle
 /local.properties

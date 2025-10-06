@@ -4,26 +4,59 @@ plugins {
 }
 
 android {
-    namespace = "com.otpextractor.gmail"
+    namespace = "com.otpextractor.secureotp"
     compileSdk = 34
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../secureotp-release-key.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+            keyAlias = "secureotp"
+            keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+        }
+    }
+
     defaultConfig {
-        applicationId = "com.otpextractor.gmail"
+        applicationId = "com.otpextractor.secureotp"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+        // Production optimizations
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // Enable code optimization
+            isMinifyEnabled = true
+            isShrinkResources = true
+            
+            // Use ProGuard for optimization
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            
+            // Sign with release key
+            signingConfig = signingConfigs.getByName("release")
+            
+            // Debugging disabled in production
+            isDebuggable = false
+            isJniDebuggable = false
+            
+            // Render script optimization
+            renderscriptOptimLevel = 3
+        }
+        
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
         }
     }
 

@@ -1,4 +1,4 @@
-package com.otpextractor.gmail
+package com.otpextractor.secureotp
 
 import android.app.Application
 import android.app.NotificationChannel

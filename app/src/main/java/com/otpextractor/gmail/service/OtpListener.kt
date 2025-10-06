@@ -1,4 +1,4 @@
-package com.otpextractor.gmail.service
+package com.otpextractor.secureotp.service
 
 import android.app.Notification
 import android.content.BroadcastReceiver
@@ -15,10 +15,10 @@ import android.service.notification.StatusBarNotification
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.otpextractor.gmail.OtpExtractorApp
-import com.otpextractor.gmail.R
-import com.otpextractor.gmail.utils.OtpExtractor
-import com.otpextractor.gmail.utils.PreferenceManager
+import com.otpextractor.secureotp.OtpExtractorApp
+import com.otpextractor.secureotp.R
+import com.otpextractor.secureotp.utils.OtpExtractor
+import com.otpextractor.secureotp.utils.PreferenceManager
 import kotlinx.coroutines.*
 
 class OtpListener : NotificationListenerService() {
