@@ -22,9 +22,10 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gmail OTP Extractor"
-        android:textSize="24sp"
+        android:text="@string/app_name"
+        android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="@color/primary"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,10 +35,12 @@
         android:id="@+id/tvDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Automatically extracts and copies OTPs from Gmail notifications"
+        android:text="@string/app_description"
         android:textAlignment="center"
         android:textSize="14sp"
+        android:textColor="@color/text_secondary"
         android:layout_marginTop="8dp"
+        android:paddingHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -164,19 +167,66 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="✨ Features"
+                android:text="✨ Universal OTP Support"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="#1976D2" />
+                android:textColor="@color/primary" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="• Works offline - no internet needed\n• Supports multiple Gmail accounts\n• Instant OTP detection from notifications\n• Battery efficient - no polling\n• Smart detection of OTP vs phone numbers"
+                android:text="@string/supported_apps"
                 android:textSize="12sp"
-                android:textColor="#424242"
-                android:layout_marginTop="8dp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="4dp"
                 android:lineSpacingExtra="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Works offline - no internet needed\n• Instant OTP detection from notifications\n• Battery efficient background processing\n• Smart detection - filters out phone numbers\n• Auto-copy to clipboard ready to paste"
+                android:textSize="12sp"
+                android:textColor="@color/text_primary"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBattery"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#E8F5E9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardInfo">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔋 @string/battery_optimization_title"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/success" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/battery_optimization_desc"
+                android:textSize="12sp"
+                android:textColor="@color/text_primary"
+                android:layout_marginTop="4dp" />
 
         </LinearLayout>
 
@@ -188,11 +238,11 @@
         android:layout_height="wrap_content"
         android:text="🔒 Privacy: All processing happens on your device. No data is sent anywhere."
         android:textSize="11sp"
-        android:textColor="?android:textColorSecondary"
+        android:textColor="@color/text_secondary"
         android:textAlignment="center"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardInfo" />
+        app:layout_constraintTop_toBottomOf="@id/cardBattery" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

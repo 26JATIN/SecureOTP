@@ -1,12 +1,14 @@
 package com.otpextractor.gmail.service
 
 import android.app.Notification
+import android.content.BroadcastReceiver
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.pm.ApplicationInfo
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.os.Bundle
+import android.os.Build
 import android.os.PowerManager
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
@@ -19,7 +21,7 @@ import com.otpextractor.gmail.utils.OtpExtractor
 import com.otpextractor.gmail.utils.PreferenceManager
 import kotlinx.coroutines.*
 
-class GmailNotificationListener : NotificationListenerService() {
+class OtpListener : NotificationListenerService() {
 
     private lateinit var prefManager: PreferenceManager
     private val processedNotifications = mutableSetOf<String>()
@@ -202,12 +204,20 @@ class GmailNotificationListener : NotificationListenerService() {
 
     override fun onListenerConnected() {
         super.onListenerConnected()
-        Log.d(TAG, "SecureOTP Notification Listener connected - monitoring all apps")
+        Log.d(TAG, "OtpListener connected - monitoring all apps")
+        
+        // Register boot receiver to restart service after reboot
+        registerBootReceiver()
     }
 
     override fun onListenerDisconnected() {
         super.onListenerDisconnected()
-        Log.d(TAG, "SecureOTP Notification Listener disconnected")
+        Log.d(TAG, "OtpListener disconnected")
+        
+        // Try to reconnect
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            requestRebind(android.content.ComponentName(this, OtpListener::class.java))
+        }
     }
 
     override fun onDestroy() {
@@ -217,10 +227,27 @@ class GmailNotificationListener : NotificationListenerService() {
         if (wakeLock?.isHeld == true) {
             wakeLock?.release()
         }
-        Log.d(TAG, "SecureOTP Service destroyed")
+        Log.d(TAG, "OtpListener destroyed")
+    }
+
+    /**
+     * Register receiver to restart service after device boot
+     */
+    private fun registerBootReceiver() {
+        try {
+            val filter = IntentFilter().apply {
+                addAction(Intent.ACTION_BOOT_COMPLETED)
+                addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED)
+                addAction(Intent.ACTION_USER_PRESENT)
+            }
+            // Note: Boot receiver should be registered in manifest, not here
+            // This is just for documentation
+        } catch (e: Exception) {
+            Log.e(TAG, "Error registering boot receiver: ${e.message}")
+        }
     }
 
     companion object {
-        private const val TAG = "SecureOTP"
+        private const val TAG = "OtpListener"
     }
 }

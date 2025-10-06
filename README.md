@@ -1,35 +1,54 @@
-# Gmail OTP Extractor for Android
+# SecureOTP - Universal OTP Extractor for Android
 
-A smart Android utility app built with Kotlin that automatically detects, extracts, and copies OTP codes from Gmail **notifications** to your clipboard instantly.
+A smart, battery-efficient Android utility app built with Kotlin that automatically detects, extracts, and copies OTP codes from **ANY app notifications** - SMS, Email, Banking apps, Social media, and more - to your clipboard instantly.
 
-## Features
+## ✨ Features
 
-✨ **Smart OTP Detection**: Intelligently identifies OTP codes even when notifications contain multiple numbers (e.g., phone numbers)
+### 🌐 Universal App Support
+- **SMS Messages**: Auto-extracts OTPs from all messaging apps
+- **Email**: Gmail, Outlook, Yahoo Mail, ProtonMail, and more
+- **Banking Apps**: All major banks and fintech apps  
+- **Social Media**: WhatsApp, Instagram, Facebook, Twitter, Telegram
+- **Payment Apps**: PayPal, Paytm, PhonePe, Google Pay, and more
+- **Any App**: Works with any app that sends OTP notifications!
 
-� **Works Offline**: No internet required - monitors Gmail notifications locally
+### 🎯 Smart Detection
+- Intelligently identifies OTP codes even when notifications contain multiple numbers
+- Filters out phone numbers, dates, and tracking numbers
+- Context-aware pattern matching for maximum accuracy
+- Supports various OTP formats:
+  - "OTP for 2310990533 is 4279" → Copies `4279`
+  - "Your verification code: 123456"  
+  - "Use code 5678 to login"
+  - "Authentication code is 9012"
+  - And many more patterns!
 
-🔋 **Battery Efficient**: Uses NotificationListenerService - no polling or API calls
+### 🔋 Battery Optimized
+- Efficient background processing with minimal battery impact
+- Smart wake lock usage (max 3 seconds per notification)
+- Uses coroutines for non-blocking operations
+- No polling, no API calls, no 24/7 background services
+- Hardware accelerated for smooth performance
 
-📧 **Multi-Account Support**: Works with all Gmail accounts on your device automatically
+### 🔒 Privacy & Security
+- **100% Local Processing**: All OTP extraction happens on your device
+- **No Internet Required**: Works completely offline
+- **No Data Collection**: Zero data sent to servers
+- **Open Source**: Fully transparent code you can audit
+- **No Permissions Abuse**: Only uses NotificationListenerService
 
-📋 **Auto-Copy**: Automatically copies detected OTPs to your clipboard
-
-🔒 **Privacy-Focused**: All processing happens locally on your device
-
-⚡ **Instant Detection**: Extracts OTP as soon as notification arrives
-
-🎯 **Context-Aware**: Understands various OTP formats:
-- "OTP for 2310990533 is 4279" → Copies `4279`
-- "Your verification code: 123456"
-- "Password is 5678"
-- And many more patterns
+### ⚡ Performance
+- Instant OTP detection as notifications arrive
+- Auto-copy to clipboard - ready to paste immediately
+- Minimal memory footprint
+- Optimized for low-end devices
 
 ## Requirements
 
 - Android 8.0 (API 26) or higher
-- Gmail app installed
 - No internet connection needed
-- No Google account setup required
+- No account setup required
+- Works with all apps that send notifications
 
 ## Setup Instructions
 
@@ -45,123 +64,88 @@ A smart Android utility app built with Kotlin that automatically detects, extrac
 
 ### 2. Using the App
 
-1. **Launch the app**
+1. **Launch SecureOTP**
 2. **Grant Notification Access**: Tap "Grant Notification Access" button
    - You'll be taken to Settings
-   - Find and enable "OTP Extractor"
-3. **Enable Monitoring**: Toggle the switch ON
-4. **Done!**: The app will now monitor Gmail notifications
+   - Find and enable "SecureOTP" in the notification access list
+3. **Enable OTP Detection**: Toggle the switch to ON
+4. **Done!** The app will now automatically:
+   - Monitor all app notifications for OTPs
+   - Extract the OTP code intelligently
+   - Copy it to your clipboard
+   - Show you a notification with the copied OTP
 
-When a Gmail notification with OTP arrives, the app will:
-- Detect the OTP code instantly
-- Copy it to your clipboard
-- Show a notification confirming the copy
+### 3. Testing
+
+Send yourself a test OTP via:
+- SMS
+- Email (Gmail, Outlook, etc.)
+- Banking app notification
+- Any app that sends OTPs
+
+The OTP will be automatically copied to your clipboard!
 
 ## How It Works
 
-The app uses `NotificationListenerService` to monitor Gmail notifications in real-time and intelligent techniques to extract OTPs:
+1. **Notification Monitoring**: Uses Android's `NotificationListenerService` to monitor notifications from all apps
+2. **Smart Filtering**: Filters out system notifications and non-relevant apps
+3. **Pattern Matching**: Uses advanced regex patterns to identify OTP codes
+4. **Context Analysis**: Understands OTP-related keywords to distinguish OTPs from other numbers
+5. **Battery Efficient**: Processes notifications asynchronously with minimal wake lock usage
+6. **Auto-Copy**: Immediately copies the detected OTP to clipboard
 
-1. **Pattern Matching**: Uses regex patterns to identify common OTP formats
-2. **Context Analysis**: Looks for keywords like "OTP", "verification", "code"
-3. **Smart Filtering**: Ignores phone numbers and other non-OTP numeric values
-4. **Priority System**: Prioritizes codes found near OTP-related keywords
+## Supported OTP Patterns
 
-### Supported OTP Patterns
+The app recognizes various OTP formats including:
+- Standard: "OTP is 123456"
+- SMS style: "123456 is your verification code"
+- Banking: "Use code 123456"
+- Email: "Your authentication code: 123456"
+- With phone numbers: "OTP for 9876543210 is 123456"
+- Formatted: "Code: 12-34-56"
+- And many more!
 
-- `OTP is 1234`
-- `Your code: 5678`
-- `Verification code 9012`
-- `OTP for 9876543210 is 4279` (ignores phone number, extracts OTP)
-- Codes in brackets: `[1234]`
-- And many more variations
+## Privacy & Permissions
 
-## Project Structure
+### Permissions Used:
+- **Notification Access**: To read notifications for OTP extraction
+- **Post Notifications**: To show you confirmation when OTP is copied
+- **Wake Lock**: For efficient background processing (minimal usage)
 
-```
-app/
-├── src/main/
-│   ├── java/com/otpextractor/gmail/
-│   │   ├── MainActivity.kt                    # Main UI
-│   │   ├── OtpExtractorApp.kt                # Application class
-│   │   ├── service/
-│   │   │   └── GmailNotificationListener.kt  # Notification monitoring service
-│   │   └── utils/
-│   │       ├── OtpExtractor.kt               # Smart OTP extraction logic
-│   │       └── PreferenceManager.kt          # Shared preferences
-│   └── res/
-│       ├── layout/
-│       │   └── activity_main.xml        # UI layout
-│       └── values/
-│           ├── strings.xml
-│           ├── colors.xml
-│           └── themes.xml
-```
+### Privacy Guarantee:
+- ✅ All processing happens locally on your device
+- ✅ No network access or internet permission
+- ✅ No data collection or analytics
+- ✅ No ads or trackers
+- ✅ Open source - you can verify yourself!
 
-## Permissions
+## Battery Optimization
 
-The app requires the following permissions:
+SecureOTP is designed for minimal battery impact:
+- Uses event-driven architecture (no polling)
+- Coroutines for non-blocking operations  
+- Wake lock held for max 3 seconds per notification
+- Efficient memory management
+- No background services when not needed
 
-- **Notification Access**: To read Gmail notifications (granted through Settings)
-- `POST_NOTIFICATIONS`: To show OTP copy confirmations
+## Architecture
 
-## Customization
-
-### Add Custom OTP Patterns
-
-Edit `OtpExtractor.kt` and add patterns to the `otpPatterns` list:
-
-```kotlin
-Pattern.compile("your_pattern_here", Pattern.CASE_INSENSITIVE)
-```
-
-## Troubleshooting
-
-### OTPs Not Being Detected
-
-1. **Check Notification Access**: 
-   - Go to Settings → Apps → Special access → Notification access
-   - Ensure "OTP Extractor" is enabled
-2. **Verify Gmail notifications are enabled**: Check Gmail app notification settings
-3. **Toggle the switch**: Make sure OTP Monitoring is ON in the app
-4. **Check logcat for errors**: `adb logcat | grep GmailNotif`
-
-### Notification Access Gets Disabled
-
-Some Android devices may revoke notification access:
-- Re-enable it from the app or Settings
-- Check if battery optimization is affecting the app
-- Some manufacturers (Xiaomi, Oppo) have aggressive battery management - whitelist the app
-
-### Multiple Accounts
-
-The app automatically works with all Gmail accounts on your device. No additional setup needed!
-
-## Privacy & Security
-
-- The app only reads Gmail notification content locally
-- **No internet access required** - completely offline
-- No data is stored or transmitted to external servers
-- All processing happens locally on your device
-- No account credentials needed or accessed
-
-## Future Enhancements
-
-- [ ] Support for other apps (SMS, WhatsApp, Telegram, etc.)
-- [ ] Custom OTP pattern configuration UI
-- [ ] OTP history log
-- [ ] Statistics (OTPs copied today/week/month)
-- [ ] Widget support
-- [ ] Dark theme
-- [ ] Whitelist/blacklist specific email senders
-
-## License
-
-This project is provided as-is for educational and personal use.
+Built with modern Android development practices:
+- **Language**: Kotlin
+- **Architecture**: Service-based with coroutines
+- **UI**: Material Design 3 components
+- **Background Processing**: NotificationListenerService + Coroutines
+- **Minimum SDK**: 26 (Android 8.0)
+- **Target SDK**: 34 (Android 14)
 
 ## Contributing
 
-Feel free to submit issues, fork the repository, and create pull requests for any improvements.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Developer
+## License
 
-Built with ❤️ using Kotlin and Android best practices.
+This project is open source. Feel free to use and modify as needed.
+
+## Disclaimer
+
+This app is for personal use to improve your OTP entry experience. Always ensure you're using it on your personal device and following your organization's security policies.

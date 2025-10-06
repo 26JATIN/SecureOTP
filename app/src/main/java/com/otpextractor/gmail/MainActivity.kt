@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.otpextractor.gmail.databinding.ActivityMainBinding
-import com.otpextractor.gmail.service.GmailNotificationListener
+import com.otpextractor.gmail.service.OtpListener
 import com.otpextractor.gmail.utils.PreferenceManager
 
 class MainActivity : AppCompatActivity() {
@@ -82,11 +82,11 @@ class MainActivity : AppCompatActivity() {
         binding.switchService.isChecked = isServiceEnabled
 
         if (isListenerEnabled) {
-            binding.tvStatus.text = "✅ Notification access granted"
+            binding.tvStatus.text = getString(R.string.access_granted)
             binding.btnEnableService.isEnabled = false
             binding.btnEnableService.alpha = 0.5f
         } else {
-            binding.tvStatus.text = "⚠️ Notification access required"
+            binding.tvStatus.text = getString(R.string.access_required)
             binding.btnEnableService.isEnabled = true
             binding.btnEnableService.alpha = 1.0f
         }
@@ -99,14 +99,14 @@ class MainActivity : AppCompatActivity() {
         val isServiceEnabled = prefManager.isServiceEnabled()
 
         binding.tvServiceStatus.text = when {
-            !isListenerEnabled -> "Service inactive - Enable notification access"
-            !isServiceEnabled -> "Service disabled - Toggle switch to enable"
-            else -> "🟢 Service active - Monitoring Gmail notifications"
+            !isListenerEnabled -> getString(R.string.service_inactive)
+            !isServiceEnabled -> getString(R.string.service_disabled)
+            else -> getString(R.string.service_active)
         }
     }
 
     private fun isNotificationListenerEnabled(): Boolean {
-        val cn = ComponentName(this, GmailNotificationListener::class.java)
+        val cn = ComponentName(this, OtpListener::class.java)
         val flat = Settings.Secure.getString(contentResolver, "enabled_notification_listeners")
         return flat != null && flat.contains(cn.flattenToString())
     }
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             Toast.makeText(
                 this,
-                "Please enable 'OTP Extractor' in the list",
+                "Please enable 'SecureOTP' in the list",
                 Toast.LENGTH_LONG
             ).show()
         } catch (e: Exception) {
@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
     private fun showEnableListenerDialog() {
         AlertDialog.Builder(this)
             .setTitle("Notification Access Required")
-            .setMessage("To monitor Gmail notifications for OTPs, this app needs notification access permission.\n\nPlease enable 'OTP Extractor' in the next screen.")
+            .setMessage("To automatically detect and copy OTPs from any app (SMS, Email, Banking, etc.), SecureOTP needs notification access.\n\nYour privacy is protected - all processing happens locally on your device.\n\nPlease enable 'SecureOTP' in the next screen.")
             .setPositiveButton("Open Settings") { _, _ ->
                 openNotificationListenerSettings()
             }

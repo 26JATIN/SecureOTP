@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">OTP Extractor</string>
+    <string name="app_name">SecureOTP</string>
+    <string name="app_description">Automatically copy numeric OTPs from any notification - SMS, Email, Banking apps &amp; more</string>
+    <string name="notification_access_label">Notification Access</string>
+    <string name="grant_access">Grant Notification Access</string>
+    <string name="service_control">Service Control</string>
+    <string name="enable_service">Enable OTP Detection</string>
+    <string name="service_active">🟢 Service Active - Monitoring all notifications</string>
+    <string name="service_inactive">Service inactive - Enable notification access</string>
+    <string name="service_disabled">Service disabled - Toggle switch to enable</string>
+    <string name="access_granted">✅ Notification access granted</string>
+    <string name="access_required">⚠️ Notification access required</string>
+    <string name="otp_copied">OTP Copied!</string>
+    <string name="copied_from">Copied from %s</string>
+    <string name="battery_optimization_title">Battery Optimization</string>
+    <string name="battery_optimization_desc">Efficient background processing - minimal battery usage</string>
+    <string name="supported_apps">Supports: SMS, Email, Banking, Social Media &amp; more</string>
 </resources>
