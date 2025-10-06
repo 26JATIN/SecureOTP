@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.otpextractor.secureotp.databinding.ActivityMainBinding
@@ -20,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var prefManager: PreferenceManager
+    private var wasListenerEnabledOnPause = false
 
     private val notificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -35,16 +35,60 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         prefManager = PreferenceManager(this)
+        
+        // Initialize the state on first load
+        wasListenerEnabledOnPause = isNotificationListenerEnabled()
 
         setupUI()
         checkPermissions()
         updateUI()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Remember the state when leaving the activity
+        wasListenerEnabledOnPause = isNotificationListenerEnabled()
+    }
+    
     override fun onResume() {
         super.onResume()
+        
+        // Check if listener was just enabled
+        val isNowEnabled = isNotificationListenerEnabled()
+        
+        // If listener was just enabled (wasn't enabled when we left, but is now)
+        if (!wasListenerEnabledOnPause && isNowEnabled) {
+            // Show success feedback
+            showPermissionGrantedFeedback()
+            wasListenerEnabledOnPause = true
+        }
+        
         updateUI()
         checkAndShowGmailWarning()
+    }
+    
+    private fun showPermissionGrantedFeedback() {
+        // Haptic feedback
+        try {
+            binding.root.performHapticFeedback(android.view.HapticFeedbackConstants.CONFIRM)
+        } catch (e: Exception) {
+            // Ignore if haptic not available
+        }
+        
+        // Show success snackbar with action
+        com.google.android.material.snackbar.Snackbar.make(
+            binding.root,
+            "🎉 Notification access granted! OTP monitoring is now active.",
+            com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+        ).setAction("Got it") {
+            // Dismiss
+        }.setBackgroundTint(ContextCompat.getColor(this, R.color.success))
+        .setTextColor(ContextCompat.getColor(this, android.R.color.white))
+        .show()
     }
 
     private fun setupUI() {
@@ -55,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         binding.switchService.setOnCheckedChangeListener { _, isChecked ->
             prefManager.setServiceEnabled(isChecked)
             if (isChecked && !isNotificationListenerEnabled()) {
-                showEnableListenerDialog()
+                // Don't allow enabling if permission not granted
                 binding.switchService.isChecked = false
             } else {
                 updateStatusText()
@@ -135,11 +179,15 @@ class MainActivity : AppCompatActivity() {
         binding.switchService.isChecked = isServiceEnabled
 
         if (isListenerEnabled) {
-            binding.tvStatus.text = getString(R.string.access_granted)
+            // Green checkmark when granted
+            binding.tvStatus.text = "✅ " + getString(R.string.access_granted)
+            binding.tvStatus.setTextColor(ContextCompat.getColor(this, R.color.success))
             binding.btnEnableService.isEnabled = false
             binding.btnEnableService.alpha = 0.5f
         } else {
-            binding.tvStatus.text = getString(R.string.access_required)
+            // Red X when not granted
+            binding.tvStatus.text = "❌ " + getString(R.string.access_required)
+            binding.tvStatus.setTextColor(ContextCompat.getColor(this, R.color.error))
             binding.btnEnableService.isEnabled = true
             binding.btnEnableService.alpha = 1.0f
         }
@@ -168,9 +216,13 @@ class MainActivity : AppCompatActivity() {
         try {
             val intent = Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
             startActivity(intent)
+            
+            // Show instructions in a toast
             Toast.makeText(
                 this,
-                "Please enable 'SecureOTP' in the list",
+                "📱 Step 1: Find 'SecureOTP' in the list\n" +
+                "📱 Step 2: Toggle it ON\n" +
+                "📱 Step 3: Press Back to return here",
                 Toast.LENGTH_LONG
             ).show()
         } catch (e: Exception) {
@@ -178,14 +230,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showEnableListenerDialog() {
-        AlertDialog.Builder(this)
-            .setTitle("Notification Access Required")
-            .setMessage("To automatically detect and copy OTPs from any app (SMS, Email, Banking, etc.), SecureOTP needs notification access.\n\nYour privacy is protected - all processing happens locally on your device.\n\nPlease enable 'SecureOTP' in the next screen.")
-            .setPositiveButton("Open Settings") { _, _ ->
-                openNotificationListenerSettings()
-            }
-            .setNegativeButton("Cancel", null)
-            .show()
-    }
+
 }
