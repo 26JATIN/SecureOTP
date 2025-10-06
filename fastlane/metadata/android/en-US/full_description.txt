@@ -1,0 +1,43 @@
+SecureOTP is a smart, privacy-focused Android utility that automatically detects, extracts, and copies OTP (One-Time Password) codes from ANY app notifications to your clipboard instantly.
+
+<b>Universal App Support</b>
+• SMS Messages - All messaging apps
+• Email - Gmail, Outlook, Yahoo, ProtonMail, etc.
+• Banking Apps - All major banks and fintech apps
+• Social Media - WhatsApp, Instagram, Facebook, Twitter, Telegram
+• Payment Apps - PayPal, Paytm, PhonePe, Google Pay
+• ANY app that sends OTP notifications!
+
+<b>Smart Detection</b>
+• Intelligently identifies OTP codes even when notifications contain multiple numbers
+• Filters out phone numbers, dates, and tracking numbers
+• Context-aware pattern matching for maximum accuracy
+• Supports various OTP formats (4-8 digit codes)
+
+<b>Privacy & Security</b>
+• 100% Local Processing - All OTP extraction happens on your device
+• No Internet Required - Works completely offline
+• No Data Collection - Zero data sent to servers
+• Open Source - Fully transparent code you can audit
+• No Permissions Abuse - Only uses NotificationListenerService
+
+<b>Battery Optimized</b>
+• Efficient background processing with minimal battery impact
+• Smart wake lock usage (max 3 seconds per notification)
+• Uses coroutines for non-blocking operations
+• No polling, no API calls, no 24/7 background services
+
+<b>Performance</b>
+• Instant OTP detection as notifications arrive
+• Auto-copy to clipboard - ready to paste immediately
+• Minimal memory footprint
+• Optimized for low-end devices
+
+<b>Requirements</b>
+• Android 8.0 (API 26) or higher
+• No internet connection needed
+• No account setup required
+
+<b>Open Source</b>
+SecureOTP is fully open source. View the code, contribute, or report issues on GitHub:
+https://github.com/26JATIN/SecureOTP
