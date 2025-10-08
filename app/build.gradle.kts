@@ -33,7 +33,8 @@ android {
         release {
             // Enable code optimization
             isMinifyEnabled = true
-            isShrinkResources = true
+            // Disable resource shrinking for reproducible builds
+            isShrinkResources = false
             
             // Use ProGuard for optimization
             proguardFiles(
