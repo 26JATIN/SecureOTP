@@ -269,7 +269,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🔋 @string/battery_optimization_title"
+                android:text="@string/battery_optimization_title"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/success" />

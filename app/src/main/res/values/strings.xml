@@ -12,7 +12,7 @@
     <string name="access_required">Notification access required</string>
     <string name="otp_copied">OTP Copied!</string>
     <string name="copied_from">Copied from %s</string>
-    <string name="battery_optimization_title">Battery Optimization</string>
+    <string name="battery_optimization_title">🔋 Battery Optimization</string>
     <string name="battery_optimization_desc">Efficient background processing - minimal battery usage</string>
     <string name="supported_apps">Supports: SMS, Email, Banking, Social Media &amp; more</string>
 </resources>
