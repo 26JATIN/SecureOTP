@@ -233,6 +233,7 @@ class OtpListener : NotificationListenerService() {
     /**
      * Register receiver to restart service after device boot
      */
+    @Suppress("UNUSED_VARIABLE")
     private fun registerBootReceiver() {
         try {
             val filter = IntentFilter().apply {

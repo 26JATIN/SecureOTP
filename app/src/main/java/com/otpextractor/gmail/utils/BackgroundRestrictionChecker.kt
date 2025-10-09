@@ -121,6 +121,7 @@ object BackgroundRestrictionChecker {
     /**
      * Check if background restrictions are enabled for an app
      */
+    @Suppress("UNUSED_PARAMETER")
     fun isBackgroundRestricted(context: Context, packageName: String): Boolean {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return false
         
@@ -145,6 +146,7 @@ object BackgroundRestrictionChecker {
     /**
      * Check if data restrictions are applied to specific app
      */
+    @Suppress("UNUSED_PARAMETER")
     fun isDataRestricted(context: Context, packageName: String): Boolean {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) return false
         
@@ -161,6 +163,7 @@ object BackgroundRestrictionChecker {
     /**
      * Get app standby bucket (Active, Working Set, Frequent, Rare, Restricted)
      */
+    @Suppress("UNUSED_PARAMETER")
     @RequiresApi(Build.VERSION_CODES.P)
     fun getStandbyBucket(context: Context, packageName: String): Int {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return -1
