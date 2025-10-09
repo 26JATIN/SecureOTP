@@ -20,8 +20,8 @@ android {
         applicationId = "com.otpextractor.secureotp"
         minSdk = 26
         targetSdk = 34
-        versionCode = 4
-        versionName = "1.0.3"
+        versionCode = 5
+        versionName = "1.0.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
@@ -34,7 +34,7 @@ android {
             // Enable code optimization
             isMinifyEnabled = true
             // Disable resource shrinking for reproducible builds
-            isShrinkResources = true
+            isShrinkResources = false
             
             // Use ProGuard for optimization
             proguardFiles(
