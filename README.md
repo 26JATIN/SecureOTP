@@ -54,7 +54,7 @@ A smart, battery-efficient Android utility app built with Kotlin that automatica
 
 ### 1. Install Via APK
 
-1. Download release apk from release section
+1. Download the latest APK from [F-Droid](https://f-droid.org/packages/com.otpextractor.secureotp/) or on Github from the [Releases Section](https://github.com/26JATIN/SecureOTP/releases/latest)
 2. before installing u need to disable google play protect as google wont allow notification permission from a non verified developer
 3. go to play store, click on profile button go to play protect and turn off it!!
 4. click the apk and install the app.
